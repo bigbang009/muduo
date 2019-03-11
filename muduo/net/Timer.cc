@@ -17,10 +17,10 @@ void Timer::restart(Timestamp now)
 {
   if (repeat_)
   {
-    expiration_ = addTime(now, interval_);
+    expiration_ = addTime(now, interval_); //过期时间
   }
   else
   {
-    expiration_ = Timestamp::invalid();
+    expiration_ = Timestamp::invalid();// 构造空的Timestamp
   }
 }

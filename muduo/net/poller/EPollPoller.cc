@@ -36,9 +36,13 @@ const int kAdded = 1;
 const int kDeleted = 2;
 }
 
+/* loop也会作为基类Poller的构造函数参数
+   epollfd_创建epoll fd
+   events_初始化16个元素值为0的vector
+*/
 EPollPoller::EPollPoller(EventLoop* loop)
   : Poller(loop),
-    epollfd_(::epoll_create1(EPOLL_CLOEXEC)),
+	epollfd_(::epoll_create1(EPOLL_CLOEXEC)),
     events_(kInitEventListSize)
 {
   if (epollfd_ < 0)
