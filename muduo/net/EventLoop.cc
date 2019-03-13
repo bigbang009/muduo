@@ -198,6 +198,7 @@ void EventLoop::cancel(TimerId timerId)
   return timerQueue_->cancel(timerId);
 }
 
+//poller对象更新channel
 void EventLoop::updateChannel(Channel* channel)
 {
   assert(channel->ownerLoop() == this);

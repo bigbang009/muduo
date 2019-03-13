@@ -26,6 +26,7 @@ PollPoller::PollPoller(EventLoop* loop)
 
 PollPoller::~PollPoller() = default;
 
+//监视并等待std::vector<struct pollfd> pollfds_容器中文件描述符的属性变化，并将发生的事件放进activeChannels
 Timestamp PollPoller::poll(int timeoutMs, ChannelList* activeChannels)
 {
   // XXX pollfds_ shouldn't change
@@ -52,6 +53,7 @@ Timestamp PollPoller::poll(int timeoutMs, ChannelList* activeChannels)
   return now;
 }
 
+//解析发生的事件pollfd，并组装成channel放入 std::vector<Channel*>  activeChannels
 void PollPoller::fillActiveChannels(int numEvents,
                                     ChannelList* activeChannels) const
 {
@@ -72,6 +74,7 @@ void PollPoller::fillActiveChannels(int numEvents,
   }
 }
 
+//更新已有的channel，如果是新的channel，则加入channels_；否则更新已有的channels_
 void PollPoller::updateChannel(Channel* channel)
 {
   Poller::assertInLoopThread();

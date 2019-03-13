@@ -28,12 +28,12 @@ TcpServer::TcpServer(EventLoop* loop,
     name_(nameArg),
     acceptor_(new Acceptor(loop, listenAddr, option == kReusePort)),
     threadPool_(new EventLoopThreadPool(loop, name_)),
-    connectionCallback_(defaultConnectionCallback),
+    connectionCallback_(defaultConnectionCallback), //TcpConnection.cc回调函数
     messageCallback_(defaultMessageCallback),
     nextConnId_(1)
 {
   acceptor_->setNewConnectionCallback(
-      std::bind(&TcpServer::newConnection, this, _1, _2));
+      std::bind(&TcpServer::newConnection, this, _1, _2));//将newConnection设置成回调函数
 }
 
 TcpServer::~TcpServer()

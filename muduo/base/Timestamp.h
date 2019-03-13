@@ -20,6 +20,8 @@ namespace muduo
 /// This class is immutable.
 /// It's recommended to pass it by value, since it's passed in register on x64.
 ///
+
+//继承boost::equality_comparable和boost::less_than_comparable，只需实现<和==运算符即可达到其他运算符的比较
 class Timestamp : public muduo::copyable,
                   public boost::equality_comparable<Timestamp>,
                   public boost::less_than_comparable<Timestamp>
